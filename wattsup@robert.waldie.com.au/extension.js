@@ -19,8 +19,8 @@ const RateMenu = new Lang.Class({
 	},
 
 	_buildUi: function() {
-		this._rateLabel = new St.Label({ text: ":|" });
-		this.actor.add_actor(this._rateLabel);
+		this._rateIcon = new St.Icon({ icon_name: 'face-plain-symbolic', style_class: 'system-status-icon' });
+		this.actor.add_actor(this._rateIcon);
 		this.menu.removeAll();
 		this._curRateItem = new PopupMenu.PopupImageMenuItem("NFI", "view-refresh-symbolic");
 		this._curRateItem.connect("activate", function() {
@@ -33,11 +33,11 @@ const RateMenu = new Lang.Class({
 	},
 
 	_updateUi: function() {
-		this._curRateItem.label.text = "Energy Rate " + this._rate.toString();
+		this._curRateItem.label.text = "Energy Rate " + this._rate.toFixed(2);
 		if (this._rate > this._maxRate) {
-			this._rateLabel.text = ":(";
+			this._rateIcon.icon_name = 'face-crying-symbolic';
 		} else {
-			this._rateLabel.text = ":)";
+			this._rateIcon.icon_name = 'face-cool-symbolic';
 		}
 	},
 
